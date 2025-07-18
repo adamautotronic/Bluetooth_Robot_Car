@@ -1,18 +1,21 @@
-# Bluetooth_Robot_Car
+Voici ce qu'il fait :
+Fonctionnement général
+Le code utilise un module L298N pour contrôler deux moteurs (gauche et droit) d'un robot. Il reçoit des commandes via la liaison série (Bluetooth) et exécute les mouvements correspondants.
+Décomposition du code
+Configuration des broches :
 
-Fonction stopMotors() : Arrête tous les moteurs en mettant toutes les broches à LOW
-3.Logique d'arrêt automatique : Si aucune donnée n'est disponible sur le port série, le robot s'arrête
-4.Commande 'S' optionnelle : Pour arrêter manuellement le robot
+Broches 5/6 : contrôle du moteur droit (avant/arrière)
+Broches 7/8 : contrôle du moteur gauche (avant/arrière)
 
-Comment cela fonctionne :
+Commandes disponibles :
 
-* Appui maintenu : Tant que vous maintenez 'F', 'B', 'L', ou 'R', le robot continue le mouvement
-** Relâchement : Dès que vous relâchez (pas de nouvelle commande), Serial.available() devient false et le robot s'arrête
-*** Réactivité : Sans delay, le robot réagit quasi-instantanément
+'F' : Avancer - les deux moteurs tournent vers l'avant
+'B' : Reculer - les deux moteurs tournent vers l'arrière
+'L' : Tourner à gauche - seul le moteur droit tourne (le robot pivote)
+'R' : Tourner à droite - seul le moteur gauche tourne (le robot pivote)
 
-Côté application Bluetooth :
-Votre application devra envoyer :
+Rôle de delay(50)
+La ligne delay(50) à la fin sert à :
 
-La commande en continu tant que le bouton est pressé
-Plus rien quand le bouton est relâché (ou envoyer 'S')
+faire executer chaque commande une durée de 50ms, Ce code Arduino contrôle un robot à deux roues via des commandes Bluetooth
 
